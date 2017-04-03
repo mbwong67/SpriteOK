@@ -35,11 +35,11 @@ public class MainActivity extends AppCompatActivity {
     @Override public boolean dispatchKeyEvent(KeyEvent event) {
         boolean down = (event.getAction() == KeyEvent.ACTION_DOWN);
         switch(event.getKeyCode()) {
-            case KeyEvent.KEYCODE_Z:
+            case KeyEvent.KEYCODE_A:
                 game.keyLeft(down); break;
-            case KeyEvent.KEYCODE_X:
+            case KeyEvent.KEYCODE_D:
                 game.keyRight(down); break;
-            case KeyEvent.KEYCODE_M:
+            case KeyEvent.KEYCODE_SPACE:
                 game.keyJump(down); break;
         }
         return true;
