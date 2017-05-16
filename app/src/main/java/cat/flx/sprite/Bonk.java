@@ -6,7 +6,7 @@ class Bonk extends Character {
     private int dir;
     private boolean jumping, willJump;
 
-    private static final int[][] states = {
+    private int[][] states = {
             { 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 13, 13, 14, 14, 14, 13, 13 }, // 0: standing by
             { 6, 7, 8, 9 },  // 1: walking left
             { 0, 1, 2, 3 },  // 2: walking right
@@ -17,7 +17,12 @@ class Bonk extends Character {
             { 5 }, // 7: Falling right
             { 15} , // 8: Jumping/falling front
     };
+
     int[][] getStates() { return states; }
+
+    public void setStates(int[][] states) {
+        this.states = states;
+    }
 
     Bonk(Game game) {
         super(game);

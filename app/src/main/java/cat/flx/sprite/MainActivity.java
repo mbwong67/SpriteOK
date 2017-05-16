@@ -4,12 +4,16 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
     Game game;
-
+    Button pause;
+    ImageView imagePause;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,9 +21,22 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         setContentView(R.layout.activity_main);
-        GameView gameView = (GameView) findViewById(R.id.view);
+        final GameView gameView = (GameView) findViewById(R.id.view);
         game = new Game(this);
         gameView.setGame(game);
+        pause = (Button) findViewById(R.id.pause);
+        imagePause = (ImageView) findViewById(R.id.imagePause);
+        pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(gameView.isPause()){gameView.setPause(false);
+                    imagePause.setVisibility(View.GONE);
+                }
+                else {gameView.setPause(true);
+                    imagePause.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 
     @Override public void onResume() {
