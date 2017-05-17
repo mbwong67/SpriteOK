@@ -18,6 +18,15 @@ class Game {
     private List<Coin> coins;
     private List<Enemy> enemies;
     private int screenOffsetX, screenOffsetY;
+    private Bomb b1;
+    private Bomb b2;
+    private Bomb b3;
+    private Bomb b4;
+    private Bomb b5;
+    private Bomb b6;
+    private Bomb b7;
+    private Bomb b8;
+    private List<Bomb> bombs;
 
     Game(Activity activity) {
         this.context = activity;
@@ -27,10 +36,44 @@ class Game {
         bonk = new Bonk(this);
         coins = new ArrayList<>();
         enemies = new ArrayList<>();
+        bombs = new ArrayList<>();
+        b1 = new Bomb(this);
+        b2 = new Bomb(this);
+        b3 = new Bomb(this);
+        b4 = new Bomb(this);
+        b5 = new Bomb(this);
+        b6 = new Bomb(this);
+        b7 = new Bomb(this);
+        b8 = new Bomb(this);
         scene.loadFromFile(R.raw.mini);
         bonk.x = 16 * 10;
         bonk.y = 0;
+        b1.x = 10 * 10;
+        b1.y = 0;
+        bombs.add(b1);
+        b2.x = 15 * 10;
+        b2.y = -50;
+        bombs.add(b2);
+        b3.x = 20 * 10;
+        b3.y = -100;
+        bombs.add(b3);
+        b4.x = 25 * 10;
+        b4.y = -150;
+        bombs.add(b4);
+        b5.x = 30 * 10;
+        b5.y = -200;
+        bombs.add(b5);
+        b6.x = 35 * 10;
+        b6.y = -250;
+        bombs.add(b6);
+        b7.x = 40 * 10;
+        b7.y = -300;
+        bombs.add(b7);
+        b8.x = 45 * 10;
+        b8.y = -350;
+        bombs.add(b8);
     }
+
     Context getContext() { return context; }
     Resources getResources() { return context.getResources(); }
 
@@ -49,6 +92,10 @@ class Game {
     }
     List<Enemy> getEnemies() { return enemies; }
 
+    void addBomb(Bomb bomb){
+        bombs.add(bomb);
+    }
+
     void physics() {
         bonk.physics();
         for(Coin coin : coins) {
@@ -62,6 +109,17 @@ class Game {
         for(Enemy enemy : enemies) {
             enemy.physics();
             if (enemy.getCollisionRect().intersect(bonk.getCollisionRect())) {
+                audio.die();
+                bonk.x = -1000;
+                bonk.y = -1000;
+                for (Bomb bomb : bombs){
+                    bomb.stop();
+                }
+            }
+        }
+        for(Bomb bomb : bombs) {
+            bomb.physics();
+            if (bomb.getCollisionRect().intersect(bonk.getCollisionRect())) {
                 audio.die();
                 bonk.x = -1000;
                 bonk.y = -1000;
@@ -96,6 +154,9 @@ class Game {
         }
         for(Enemy enemy : enemies) {
             enemy.draw(canvas);
+        }
+        for(Bomb bomb : bombs) {
+            bomb.draw(canvas);
         }
 //        if (Math.random() > 0.95f) audio.coin();
 //        if (Math.random() > 0.95f) audio.die();
