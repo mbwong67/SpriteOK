@@ -18,6 +18,7 @@ class Game {
     private List<Coin> coins;
     private List<Enemy> enemies;
     private int screenOffsetX, screenOffsetY;
+    private int score = 0;
     private Bomb b1;
     private Bomb b2;
     private Bomb b3;
@@ -77,6 +78,14 @@ class Game {
     Context getContext() { return context; }
     Resources getResources() { return context.getResources(); }
 
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     BitmapSet getBitmapSet() { return bitmapSet; }
     Scene getScene() { return scene; }
     Audio getAudio() { return audio; }
@@ -104,6 +113,7 @@ class Game {
                 audio.coin();
                 coin.x = -1000;
                 coin.y = -1000;
+                score++;
             }
         }
         for(Enemy enemy : enemies) {

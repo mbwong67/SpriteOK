@@ -9,11 +9,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     Game game;
     Button pause;
     ImageView imagePause;
+    TextView score;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         gameView.setGame(game);
         pause = (Button) findViewById(R.id.pause);
         imagePause = (ImageView) findViewById(R.id.imagePause);
+        score = (TextView) findViewById(R.id.score);
+        score.setText(String.valueOf(game.getScore()));
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -36,4 +36,15 @@
         android:visibility="gone"
         app:srcCompat="@android:drawable/ic_media_pause" />
 
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:layout_below="@+id/pause"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
