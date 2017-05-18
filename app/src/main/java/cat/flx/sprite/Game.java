@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static cat.flx.sprite.R.id.score;
 
 class Game {
     private Context context;
@@ -18,7 +21,7 @@ class Game {
     private List<Coin> coins;
     private List<Enemy> enemies;
     private int screenOffsetX, screenOffsetY;
-    private int score = 0;
+    private int score2 = 0;
     private Bomb b1;
     private Bomb b2;
     private Bomb b3;
@@ -28,8 +31,10 @@ class Game {
     private Bomb b7;
     private Bomb b8;
     private List<Bomb> bombs;
+    private TextView score;
 
-    Game(Activity activity) {
+    Game(Activity activity, TextView score) {
+        this.score = score;
         this.context = activity;
         bitmapSet = new BitmapSet(context.getResources());
         audio = new Audio(activity);
@@ -79,11 +84,11 @@ class Game {
     Resources getResources() { return context.getResources(); }
 
     public int getScore() {
-        return score;
+        return score2;
     }
 
     public void setScore(int score) {
-        this.score = score;
+        this.score2 = score;
     }
 
     BitmapSet getBitmapSet() { return bitmapSet; }
@@ -113,7 +118,8 @@ class Game {
                 audio.coin();
                 coin.x = -1000;
                 coin.y = -1000;
-                score++;
+                score2++;
+                score.setText(String.valueOf(score2));
             }
         }
         for(Enemy enemy : enemies) {

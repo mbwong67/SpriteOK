@@ -24,12 +24,12 @@ public class MainActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         setContentView(R.layout.activity_main);
         final GameView gameView = (GameView) findViewById(R.id.view);
-        game = new Game(this);
+        score = (TextView) findViewById(R.id.score);
+        game = new Game(this, score);
         gameView.setGame(game);
         pause = (Button) findViewById(R.id.pause);
         imagePause = (ImageView) findViewById(R.id.imagePause);
-        score = (TextView) findViewById(R.id.score);
-        score.setText(String.valueOf(game.getScore()));
+
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
